@@ -8,15 +8,15 @@
 }
 
 .error {
-  border: #ff0000 3px solid;
+  border: red 1px solid;
 }
 
 .error-message {
-  color: red
+  color: red;
 }
-paint
+
 .active-filter {
-  background-color: #ff42cd;
+  background-color: aquamarine;
 }
 
 .is-done {
