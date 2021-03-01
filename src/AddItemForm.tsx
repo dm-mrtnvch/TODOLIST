@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {Button, IconButton, TextField} from '@material-ui/core';
-import {ControlPoint, TextFields} from '@material-ui/icons';
+import {ControlPoint} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -33,15 +33,18 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     return <div>
         <TextField value={title}
-                   variant={'outlined'}
                    label={'Type value'}
+                   variant={'outlined'}
+                   error={!!error}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
-                   error={!!error}
                    helperText={error}
+
         />
-        <IconButton onClick={addItem} color={'primary'}>
+        <IconButton color={'primary'} onClick={addItem}>
             <ControlPoint/>
         </IconButton>
+
+
     </div>
 }
