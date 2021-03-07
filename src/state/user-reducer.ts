@@ -1,51 +1,35 @@
-export type UserType = {
-    name: string
+type StateType = {
     age: number
     childrenCount: number
+    name: string
 }
-
 type ActionType = {
     type: string
     [key: string]: any
 }
 
-// function incAge(user: UserType){
-//     return {
-//         ...user,
-//         age: user.age + 1
-//     }
-// }
-// function incrementChildrenCount(user: UserType,){
-//     return {
-//         ...user,
-//         age: user.childrenCount + 1
-//     }
-// }
-// function changeName(user: UserType, newName: string){
-//     return {
-//         ...user,
-//         name: newName
-//     }
-// }
-
-export function userReducer(user: UserType, action: ActionType) {
-    switch (action.type){
+// меня вызовут и дадут мне стейт (почти всегда объект)
+// и инструкцию (action, тоже объект)
+// согласно прописаному type в этом action (инструкции) я поменяю state
+export const userReducer = (state: StateType, action: ActionType) => {
+    switch (action.type) {
         case 'INCREMENT-AGE':
-            return {
-                ...user,
-                age: user.age + 1
-            }
+            let newState = {...state};//делаем копию
+            newState.age = state.age + 1;// у копии имеем право менять св-во
+            return newState;//возвращаем копию
         case 'INCREMENT-CHILDREN-COUNT':
+            // а можно без создания переменных промежуточных (делайте, как вам понятнее)
             return {
-                ...user,
-                childrenCount: user.childrenCount + 1
-            }
+                ...state,
+                childrenCount: state.childrenCount + 1
+            };
         case 'CHANGE-NAME':
+            // а можно без  создания переменных промежуточных (делайте, как вам понятнее)
             return {
-                ...user,
+                ...state,
                 name: action.newName
-            }
+            };
         default:
-            return user
+            throw new Error("I don't understand this type")
     }
 }
