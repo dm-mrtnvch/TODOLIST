@@ -5,8 +5,8 @@ import {Delete} from '@material-ui/icons';
 import {TaskType} from '../Todolist';
 
 type TaskPropsType = {
-    task: TaskType
-    onChangeHandler: () => void
+        task: TaskType
+        onChangeHandler: () => void
         onTitleChangeHandler: () => void
     onClickHandler: () => void
 }

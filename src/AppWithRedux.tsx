@@ -7,9 +7,11 @@ import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography}
 import {Menu} from '@material-ui/icons';
 import {
     addTodolistAC,
-    changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC,
+    changeTodolistFilterAC, changeTodolistTitleAC, removeTodolistAC,
+    // addTodolistAC,
+    // changeTodolistFilterAC,
+    // changeTodolistTitleAC,
+    // removeTodolistAC,
     todolistsReducer
 } from './state/todolists-reducer';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
@@ -25,6 +27,14 @@ export type TodolistType = {
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
+}
+
+
+function Fake(props: any) {
+    console.log('Fake is called')
+    return (
+        <h1>{props.count}</h1>
+    )
 }
 
 
@@ -92,6 +102,7 @@ function AppWithRedux() {
             <Container fixed>
                 <Grid container style={{padding: "20px"}}>
                     <AddItemForm addItem={addTodolist}/>
+                    <Fake count={10}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {
