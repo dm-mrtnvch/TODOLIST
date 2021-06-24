@@ -1,9 +1,16 @@
 import React from 'react'
 import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField, Button, Grid} from '@material-ui/core'
 import {useFormik} from 'formik';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginTC} from './authReducer';
+import {AppRootStateType} from '../../app/store';
+import { Redirect } from 'react-router-dom';
 
 
 export const Login = () => {
+
+    const dispatch = useDispatch()
+    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
 
     const formik = useFormik({
         initialValues: {
@@ -12,8 +19,9 @@ export const Login = () => {
             rememberMe: false
         },
         onSubmit: values => {
-            debugger
-            alert(JSON.stringify(values));
+            // debugger
+            // alert(JSON.stringify(values));
+            dispatch(loginTC(values))
             formik.resetForm()
         },
         validate: values => {
@@ -35,9 +43,15 @@ export const Login = () => {
 
     })
 
+
+    if(isLoggedIn) {
+        return <Redirect to={'/'}/>
+    }
+
+
     return <Grid container justify="center">
         <Grid item xs={4}>
-            <form onSubmit={formik.handleSubmit}/>
+            <form onSubmit={formik.handleSubmit}>
             <FormControl>
                 <FormLabel>
                     <p>To log in get registered
@@ -92,7 +106,7 @@ export const Login = () => {
                     <Button type={'submit'} variant={'contained'} color={'primary'}>Login</Button>
                 </FormGroup>
             </FormControl>
-            <form/>
+            </form>
         </Grid>
     </Grid>
 }
